@@ -18,21 +18,72 @@ public class Gradebook {
 
     public boolean changeGrade(String lastName, String assnName, int newGrade) {
         // Your code here
-        return false;
+        for ( int i = 0 ; i< labels.length ; i++){
+            if (book[i][0].equals(lastName)){
+                for (int x = 0; x< book[i].length;x++){
+                    if (assnName.equals(labels[i])){
+                        book[i][x] = Integer.toString(newGrade);
+                        return true;
+                    }
+                    
+                }
+            }
+        }  
+        return false;   
     }
 
     public double findAssignmentAverage(String assnName) {
         // Your code here
-        return -1;
+        int where = -1;
+        int index = 0;
+        while (index < labels.length)
+        {
+	        if (labels[index] == assnName)
+	        {
+		        where = index;
+	        }
+	        index ++;
+        }
+        if (where == -1){
+            return -1;
+        }
+        double count =0.0;
+        double total =0.0;
+        for (int i = 0; i < book.length; i++){
+            count += 1;
+            total += Double.valueOf(book[i][where]);
+        }
+        return total/count;
     }
 
     public double findStudentAverage(String lastName) {
         // Your code here
-        return -1;
+        double total = 0.0;
+        for (int i = 0; i< book.length; i++){
+            if (book[i][0].equals(lastName)){
+                for (int x = 2; x < book[0].length; x++){
+                    total += Double.valueOf(book[i][x]);
+                }
+            }
+        }
+        return total / 14;
     }
 
     public void printStudentInfo(String lastName) {
         // Your code here
+        int index = 0;
+        while (index < book.length)
+        {
+	        if (book[0][index] == lastName)
+	        {
+		        break;
+	        }
+	        index ++;
+        }
+        for (int i = 0; i < book.length; i++){
+            System.out.println(labels[i] + ": " + book[index][i]);
+        }
+        
     }
 
 }
