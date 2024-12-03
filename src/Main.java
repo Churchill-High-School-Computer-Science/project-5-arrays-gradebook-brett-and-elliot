@@ -35,10 +35,10 @@ public class Main {
 
         Gradebook testBook1 = new Gradebook(data1);
         Gradebook testBook2 = new Gradebook(data2);
-        //System.out.println(testBook1.changeGrade("Borjigin", "Test1", 90));
-        //System.out.println(testBook1.book[1][3]);
+        System.out.println(testBook1.changeGrade("Borjigin", "Test1", 90));
+        System.out.println(testBook1.book[0][2]);
         System.out.println(testBook1.findAssignmentAverage("Test1"));
-       // System.out.println(testBook1.findStudentAverage("Jadran"));
-        //testBook2.printStudentInfo("Rostov");
+        System.out.println(testBook1.findStudentAverage("Jadran"));
+        testBook2.printStudentInfo("Rostov");
     }
 }

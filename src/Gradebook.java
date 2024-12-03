@@ -18,10 +18,10 @@ public class Gradebook {
 
     public boolean changeGrade(String lastName, String assnName, int newGrade) {
         // Your code here
-        for ( int i = 0 ; i< labels.length ; i++){
+        for ( int i = 0 ; i< book.length ; i++){
             if (book[i][0].equals(lastName)){
-                for (int x = 0; x< book[i].length;x++){
-                    if (assnName.equals(labels[i])){
+                for (int x = 0; x< labels.length;x++){
+                    if (assnName.equals(labels[x])){
                         book[i][x] = Integer.toString(newGrade);
                         return true;
                     }
@@ -58,15 +58,28 @@ public class Gradebook {
 
     public double findStudentAverage(String lastName) {
         // Your code here
-        double total = 0.0;
+        double tests = 0.0;
+        double quiz = 0.0;
+        double daily = 0.0;
         for (int i = 0; i< book.length; i++){
             if (book[i][0].equals(lastName)){
                 for (int x = 2; x < book[0].length; x++){
-                    total += Double.valueOf(book[i][x]);
+                    if (x < 4){
+                        tests += Double.valueOf(book[i][x]);
+                    }
+                    if (x >=4 && x < 6){
+                        quiz += Double.valueOf(book[i][x]);
+                    }
+                    if (x>=6){
+                        daily += Double.valueOf(book[i][x]);
+                    }
                 }
             }
+            }
+        if (tests == 0.0 && quiz == 0.0 && daily == 0.0){
+            return -1.0;
         }
-        return total / 14;
+        return (daily /10)*.4 + (tests /2) * .3 + (quiz /2)*.3;
     }
 
     public void printStudentInfo(String lastName) {
@@ -80,7 +93,10 @@ public class Gradebook {
 	        }
 	        index ++;
         }
-        for (int i = 0; i < book.length; i++){
+        if (index == book.length){
+            System.out.println("That student does not exist");
+        }
+        for (int i = 0; i < book[0].length; i++){
             System.out.println(labels[i] + ": " + book[index][i]);
         }
         
